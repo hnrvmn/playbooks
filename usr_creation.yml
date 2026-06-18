@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+
+    - name: Create user
+      user:
+        name: ansibletest
+        state: present
+
+    - name: Configure sudo
+      copy:
+        dest: /etc/sudoers.d/ansibletest
+        content: |
+          ansibletest ALL=(ALL) NOPASSWD: ALL
+        mode: '0440'
