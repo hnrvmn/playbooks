@@ -1,0 +1,45 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+
+    - name: Hostname
+      command: hostname
+      register: hostname_out
+
+    - name: Uptime
+      command: uptime
+      register: uptime_out
+
+    - name: Memory
+      command: free -m
+      register: memory_out
+
+    - name: Disk
+      command: df -h /
+      register: disk_out
+
+    - name: Kernel
+      command: uname -r
+      register: kernel_out
+
+    - name: Display Hostname
+      debug:
+        var: hostname_out.stdout
+
+    - name: Display Uptime
+      debug:
+        var: uptime_out.stdout
+
+    - name: Display Memory
+      debug:
+        var: memory_out.stdout_lines
+
+    - name: Display Disk
+      debug:
+        var: disk_out.stdout_lines
+
+    - name: Display Kernel
+      debug:
+        var: kernel_out.stdout
