@@ -4,14 +4,14 @@
 
   tasks:
 
-    - name: Create user
+    - name: Create Linux user
       user:
-        name: ansibletest
+        name: "{{ username }}"
         state: present
 
     - name: Configure sudo
       copy:
-        dest: /etc/sudoers.d/ansibletest
+        dest: "/etc/sudoers.d/{{ username }}"
         content: |
-          ansibletest ALL=(ALL) NOPASSWD: ALL
+          {{ username }} ALL=(ALL) NOPASSWD: ALL
         mode: '0440'
