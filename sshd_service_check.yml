@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: no
+
+  tasks:
+    - name: Check sshd status
+      command: systemctl is-active sshd
+      register: sshd_status
+
+    - name: Display status
+      debug:
+        var: sshd_status.stdout
